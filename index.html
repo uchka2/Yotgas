@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>I love you Bolroo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffdee9, #b5fffc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      position: relative;
+      color: #333;
+      user-select: none;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .container h1 {
+      font-size: 3em;
+      color: #ff0080;
+      text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff00ff;
+      animation: glow 2s ease-in-out infinite alternate;
+      cursor: pointer;
+      margin: 0;
+      user-select: none;
+    }
+
+    .name {
+      background: linear-gradient(to right, #ff0000, #ff9900, #ffff00, #33cc33, #33ccff, #9900ff);
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: rainbow 3s linear infinite;
+      font-weight: bold;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #ff0080, 0 0 10px #ff00ff;
+      }
+      to {
+        text-shadow: 0 0 20px #ff0080, 0 0 30px #ff00ff;
+      }
+    }
+
+    @keyframes rainbow {
+      0% { background-position: 0%; }
+      100% { background-position: 100%; }
+    }
+
+    .emoji-rain span {
+      position: absolute;
+      top: -2em;
+      font-size: 2em;
+      animation: fall 5s linear infinite;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 20px;
+      text-align: center;
+      font-size: 1.5em;
+      color: #ff0080;
+      box-shadow: 0 0 30px #ff00ff;
+      max-width: 400px;
+      width: 100%;
+      user-select: text;
+    }
+
+    .popup-content button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff0080;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .popup-content button:hover {
+      background: #cc0066;
+    }
+
+    audio {
+      margin-top: 20px;
+      width: 100%;
+      outline: none;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #ff88cc;
+      background: #fff0f6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 onclick="showPopup()">I love you <span class="name">Bolroo</span> ❤️</h1>
+  </div>
+
+  <div class="emoji-rain" id="emojiRain"></div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <p>You're my everything, Bolroo! 💕</p>
+      <audio id="loveSong" controls preload="auto">
+        <source src="funky-upbeat-retro-quirky-music-364213.mp3" type="audio/mpeg" />
+        Таны браузер дэмжихгүй байна.
+      </audio>
+      <button onclick="hidePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const emojiRain = document.getElementById('emojiRain');
+    const emojis = ["💖", "✨", "💕", "💘", "🌸", "🌟", "❤️", "🥰"];
+
+    function createEmoji() {
+      const emoji = document.createElement('span');
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + 'vw';
+      emoji.style.animationDuration = 3 + Math.random() * 3 + 's';
+      emojiRain.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 6000);
+    }
+
+    setInterval(createEmoji, 300);
+
+    function showPopup() {
+      document.getElementById("popup").style.display = "flex";
+      const music = document.getElementById("loveSong");
+      music.volume = 0.6;
+      music.play();
+    }
+
+    function hidePopup() {
+      document.getElementById("popup").style.display = "none";
+      const music = document.getElementById("loveSong");
+      music.pause();
+      music.currentTime = 0;
+    }
+  </script>
+</body>
+</html>
